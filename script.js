@@ -1,12 +1,28 @@
-const fetchTrivia = async (endpoint='', qtd=5) => {
+let dificuldadeAtual = '';
+let questoesAtuais = [];
+let questaoAtual = 0;
+let acertos = 0;
+let respondida = false;
+
+const fetchTrivia = async (dificuldade = '', qtd = 5) => {
     try {
-        const url = `https://opentdb.com/api.php?amount=${qtd}${endpoint}`
+        const difficultyParam = dificuldade ? `&difficulty=${dificuldade}` : '';
+        const url = `https://opentdb.com/api.php?amount=${qtd}${difficultyParam}&type=multiple`;
+        
+        console.log(`Buscando ${qtd} questões de dificuldade: ${dificuldade || 'aleatória'}`);
+        
         let resultado = await fetch(url);
         resultado = await resultado.json();
 
+        if (resultado.response_code !== 0) {
+            console.error('Erro ao buscar questões:', resultado.response_code);
+            return [];
+        }
+
         return resultado.results;
     } catch (e) {
-        console.error(e.message)
+        console.error('Erro na requisição de trivia:', e.message);
+        return [];
     }
 };
 
@@ -74,3 +90,4 @@ const mostrarQuestoes = async () => {
 }
 
 mostrarQuestoes();
+
