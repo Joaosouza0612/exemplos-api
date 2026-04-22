@@ -4,10 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1>Trivia Questions</h1>
-    <div id="question-container">Loading questions...</div>    
+    <div class="container">
+        <div id="difficulty-screen" class="screen active">
+            <div class="content">
+                <h1>Bem-vindo ao Trivia!</h1>
+                <p>Selecione o nível de dificuldade:</p>
+                <div class="difficulty-buttons">
+                    <button class="btn btn-easy" onclick="iniciarJogo('easy')">
+                        <span class="emoji">🟢</span>
+                        <span>Fácil</span>
+                    </button>
+                    <button class="btn btn-medium" onclick="iniciarJogo('medium')">
+                        <span class="emoji">🟡</span>
+                        <span>Médio</span>
+                    </button>
+                    <button class="btn btn-hard" onclick="iniciarJogo('hard')">
+                        <span class="emoji">🔴</span>
+                        <span>Difícil</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="header">
+                <div class="progress">
+                    <span id="question-counter">Questão 1/5</span>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+                <button class="btn-exit" onclick="voltarAoMenu()">✕</button>
+            </div>
+
+            <div class="game-content">
+                <div id="question-container" class="question-box">
+                    <p id="question-text"></p>
+                </div>
+
+                <div id="answers-container" class="answers-grid">
+                </div>
+
+                <div class="game-info">
+                    <p id="score-info">Acertos: <span id="current-score">0</span>/5</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <h1 id="result-title">Parabéns!</h1>
+                <div id="result-emoji" class="result-emoji">🎉</div>
+                <div class="result-info">
+                    <p class="result-score">
+                        Você acertou <span id="final-score">0</span>/5 questões!
+                    </p>
+                    <p id="result-message" class="result-message"></p>
+                </div>
+                <div class="result-buttons">
+                    <button class="btn btn-primary" onclick="jogarNovamente()">Jogar Novamente</button>
+                    <button class="btn btn-secondary" onclick="voltarAoMenu()">Voltar ao Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
